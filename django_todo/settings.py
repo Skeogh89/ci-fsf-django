@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2i8s4%8$2j#!e82)=gu1l23hyz4n9yejsk=489d%9t7zz5o5#1'
+SECRET_KEY = os.environ.get('SECRET_KEY', '2i8s4%8$2j#!e82)=gu1l23hyz4n9yejsk=489d%9t7zz5o5#1')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['stephen-keogh-todo-app.herokuapp.com']
+ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
 
 
 # Application definition
@@ -83,7 +84,7 @@ WSGI_APPLICATION = 'django_todo.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.parse('postgres://pkqdmchlcfycxc:60ccfd1e1a7343b91fe3e2b67b4a6cf0f109665edaa20dbe6979622c58fc5081@ec2-54-145-249-177.compute-1.amazonaws.com:5432/d4srjioiog2av8')
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
 
 
