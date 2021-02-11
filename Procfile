@@ -1,0 +1,1 @@
+web: gnunicorn django_todo.wsgi:application
